@@ -1,5 +1,4 @@
-import Rim 
-import Hub
+
 import math
 
 class Calculator:
@@ -32,7 +31,7 @@ class Calculator:
 
             return {'right':right_length, 'left':left_length}
         
-    def run(self):
+    def get_inputs_CLI(self):
         print ("getting hub specs...")
                
         # build hub
@@ -71,10 +70,7 @@ class Calculator:
             OSB = input('enter offset spoke bed. 0 for none: ')      
         OSB = float(OSB)
 
-        hub = Hub.Hub(
-            LFO = LFO, RFO = RFO, OLD = OLD, 
-            DL = DL, DR = DR, SHD = SHD, OSB = OSB
-        )
+        
 
         print ("getting rim specs...")
                         
@@ -94,11 +90,9 @@ class Calculator:
             num_crosses = input('enter number of crosses e.g. 3: ')
         num_crosses = float(num_crosses)
         
-        rim = Rim.Rim(
-           ERD = ERD, num_crosses = num_crosses, num_spokes = num_spokes
-        )     
-
-        self.hub = hub
-        self.rim = rim
+        values = {
+            'ERD':ERD, 'NSPOKE':num_spokes, 'NCROSS':num_crosses, 'LFO':LFO, 
+            'RFO':RFO, 'OLD':OLD, 'DL':DL, 'DR':DR, 'SHD':SHD, 'OSB':OSB
+        }
         
-        return(self.make_calc())
+        return(values)
