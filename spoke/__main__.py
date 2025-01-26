@@ -1,8 +1,6 @@
-from Calculator import Calculator
 import os
-import Rim 
-import Hub
 import argparse
+from spoke import calculator
 
 def exists(var):
     try:
@@ -21,8 +19,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     this_client = args.client 
 
-
-if not(exists(this_client)):
+if not exists(this_client):
     this_client = "CLI"
 
 valid_clients = {'GUI', 'CLI'}
@@ -36,8 +33,8 @@ def clear_screen():
     else:
         _ = os.system('clear')
     
-#clear_screen()
-calculator = Calculator(client = this_client)
+# clear_screen()
+calculator = calculator.Calculator(client = this_client)
 ans = calculator.run()
 string = f"Right Spoke Length: {ans.get('right')} \nLeft Spoke Length: {ans.get('left')}"
 print(string)

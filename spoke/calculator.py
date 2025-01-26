@@ -2,8 +2,8 @@
 import math
 import PySimpleGUI as sg
 import sys
-import Rim 
-import Hub
+from spoke import hub, rim
+
 
 class Calculator:
 
@@ -59,7 +59,7 @@ class Calculator:
             [sg.Text('Left spoke circle diameter'), sg.Input(key = "DL", enable_events = True)],
             [sg.Text('Right spoke circle diameter'), sg.Input(key = "DR", enable_events = True)],
             [sg.Text('Spoke hole diameter e.g. 2.6'), sg.Input(key = "SHD", enable_events = True)],
-            [sg.Text('Drilling offset. Enter O for none'), sg.Input(key = "OSB", enable_events = True)],
+            [sg.Text('Drilling offset. Enter 0 for none'), sg.Input(key = "OSB", enable_events = True)],
             [sg.Button('Submit')] 
         ]
 
@@ -251,7 +251,7 @@ class Calculator:
         elif (self.client == "GUI"):
             values = self.get_inputs_GUI()
 
-        hub = Hub.Hub(
+        this_hub = hub.Hub(
             LFO = values['LFO'], 
             RFO = values['RFO'],
             OLD = values['OLD'], 
@@ -261,14 +261,14 @@ class Calculator:
             OSB = values['OSB']
         )
 
-        rim = Rim.Rim(
+        this_rim = rim.Rim(
             ERD = values['ERD'], 
             num_crosses = values['NCROSS'], 
             num_spokes = values['NSPOKE']
         )     
 
-        self.hub = hub        
-        self.rim = rim
+        self.hub = this_hub        
+        self.rim = this_rim
         ans = self.make_calc()
         return ans
         
